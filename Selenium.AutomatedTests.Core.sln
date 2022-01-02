@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.AutomatedTests.Core", "src\Selenium.AutomatedTests.Core\Selenium.AutomatedTests.Core.csproj", "{4F53E9D7-3C03-4AE7-9BD2-9F598B22D5B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.AutomatedTests.Core", "src\Selenium.AutomatedTests.Core\Selenium.AutomatedTests.Core.csproj", "{4F53E9D7-3C03-4AE7-9BD2-9F598B22D5B2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{11E7D68B-8D92-44AA-BCC6-097B73351C04}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{51B6D3FD-5AF5-4EBC-9B88-808D72761A77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.AutomatedTests.Core.UnitTests", "tests\Selenium.AutomatedTests.Core.UnitTests\Selenium.AutomatedTests.Core.UnitTests.csproj", "{7A0C5094-0E64-4874-BE72-99A942966B86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.AutomatedTests.Core.UnitTests", "tests\Selenium.AutomatedTests.Core.UnitTests\Selenium.AutomatedTests.Core.UnitTests.csproj", "{7A0C5094-0E64-4874-BE72-99A942966B86}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{1B3D8E76-6F8D-4470-80BD-1E43A8E6D879}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.AutomatedTests.ExampleTestProject", "samples\Selenium.AutomatedTests.ExampleTestProject\Selenium.AutomatedTests.ExampleTestProject.csproj", "{0004DC41-CE33-48D9-9AA2-A0EBD06E8D62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +29,10 @@ Global
 		{7A0C5094-0E64-4874-BE72-99A942966B86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A0C5094-0E64-4874-BE72-99A942966B86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A0C5094-0E64-4874-BE72-99A942966B86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0004DC41-CE33-48D9-9AA2-A0EBD06E8D62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0004DC41-CE33-48D9-9AA2-A0EBD06E8D62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0004DC41-CE33-48D9-9AA2-A0EBD06E8D62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0004DC41-CE33-48D9-9AA2-A0EBD06E8D62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4F53E9D7-3C03-4AE7-9BD2-9F598B22D5B2} = {11E7D68B-8D92-44AA-BCC6-097B73351C04}
 		{7A0C5094-0E64-4874-BE72-99A942966B86} = {51B6D3FD-5AF5-4EBC-9B88-808D72761A77}
+		{0004DC41-CE33-48D9-9AA2-A0EBD06E8D62} = {1B3D8E76-6F8D-4470-80BD-1E43A8E6D879}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {834BADFF-9064-45B2-8A66-D91465AE3C2F}
