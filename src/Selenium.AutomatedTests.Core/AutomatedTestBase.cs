@@ -11,9 +11,8 @@ namespace Selenium.AutomatedTests.Core
         {
             using var scenarioBuilder = new AutomationScenarioBuilder(ProvideWebDriver());
             testAction(scenarioBuilder);
-            var scenarioReport = scenarioBuilder.BuildAndRun();
-            
 
+            var scenarioReport = scenarioBuilder.BuildAndRun();
             if (scenarioReport.HasFailure)
             {
                 throw new AutomationScenarioRunFailedException(scenarioReport.GetSummary());
