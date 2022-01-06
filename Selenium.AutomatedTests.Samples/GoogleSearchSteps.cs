@@ -1,8 +1,7 @@
 ﻿using OpenQA.Selenium;
-using Selenium.AutomatedTests.Core;
 using Selenium.AutomatedTests.Core.Steps;
 
-namespace Selenium.AutomatedTests.Samples
+namespace Selenium.AutomatedTests.Core.Samples
 {
     public class GoogleSearchSteps : SetupSteps
     {

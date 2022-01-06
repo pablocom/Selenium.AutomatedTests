@@ -1,6 +1,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using Selenium.AutomatedTests.Core;
+using Selenium.AutomatedTests.Core.Samples;
 using Xunit;
 
 namespace Selenium.AutomatedTests.Samples
@@ -19,7 +20,12 @@ namespace Selenium.AutomatedTests.Samples
                         step.WaitUntilSearchBarIsLoaded();
                         step.ClickOnAcceptTermsAndConditions();
                         step.Search("This is fine gif");
-                    });
+                    })
+                    .WithStep(
+                        description: $"Some step description",
+                        selectionPredicate: webDriver => webDriver.FindElement(By.Id("elementId")),
+                        action: webElement => { webElement.SendKeys("Some input"); }
+                    );
             });
         }
 
