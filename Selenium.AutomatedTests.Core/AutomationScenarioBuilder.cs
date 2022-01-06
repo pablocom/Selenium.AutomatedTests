@@ -108,7 +108,6 @@ namespace Selenium.AutomatedTests.Core
 
         public void Dispose()
         {
-            _webDriver.Close();
             _webDriver.Dispose();
         }
     }

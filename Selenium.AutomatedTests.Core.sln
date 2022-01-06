@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.AutomatedTests.Core", "src\Selenium.AutomatedTests.Core\Selenium.AutomatedTests.Core.csproj", "{4F53E9D7-3C03-4AE7-9BD2-9F598B22D5B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.AutomatedTests.Core", "Selenium.AutomatedTests.Core\Selenium.AutomatedTests.Core.csproj", "{4F53E9D7-3C03-4AE7-9BD2-9F598B22D5B2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.AutomatedTests.Core.UnitTests", "tests\Selenium.AutomatedTests.Core.UnitTests\Selenium.AutomatedTests.Core.UnitTests.csproj", "{7A0C5094-0E64-4874-BE72-99A942966B86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.AutomatedTests.Core.UnitTests", "Selenium.AutomatedTests.Core.UnitTests\Selenium.AutomatedTests.Core.UnitTests.csproj", "{7A0C5094-0E64-4874-BE72-99A942966B86}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.AutomatedTests.Samples", "samples\Selenium.AutomatedTests.ExampleTestProject\Selenium.AutomatedTests.Samples.csproj", "{0004DC41-CE33-48D9-9AA2-A0EBD06E8D62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.AutomatedTests.Samples", "Selenium.AutomatedTests.Samples\Selenium.AutomatedTests.Samples.csproj", "{0004DC41-CE33-48D9-9AA2-A0EBD06E8D62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
