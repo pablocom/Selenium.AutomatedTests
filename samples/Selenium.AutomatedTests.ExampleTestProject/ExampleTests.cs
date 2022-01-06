@@ -1,7 +1,9 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using Selenium.AutomatedTests.Core;
 using Xunit;
 
-namespace Selenium.AutomatedTests.ExampleTestProject
+namespace Selenium.AutomatedTests.Samples
 {
     public class ExampleTests : AutomatedTestBase
     {
@@ -10,8 +12,17 @@ namespace Selenium.AutomatedTests.ExampleTestProject
         {
             RunAutomatedTest(builder =>
             {
-                builder.NavigateToUrl("https://google.com");
+                builder
+                    .NavigateToUrl("https://google.com")
+                    .WithSteps<GoogleSearchSteps>(step =>
+                    {
+                        step.WaitUntilSearchBarIsLoaded();
+                        step.ClickOnAcceptTermsAndConditions();
+                        step.Search("This is fine gif");
+                    });
             });
         }
+
+        protected override IWebDriver ProvideWebDriver() => new ChromeDriver();
     }
 }

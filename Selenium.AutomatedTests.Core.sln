@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.AutomatedTests.Cor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{1B3D8E76-6F8D-4470-80BD-1E43A8E6D879}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.AutomatedTests.ExampleTestProject", "samples\Selenium.AutomatedTests.ExampleTestProject\Selenium.AutomatedTests.ExampleTestProject.csproj", "{0004DC41-CE33-48D9-9AA2-A0EBD06E8D62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.AutomatedTests.Samples", "samples\Selenium.AutomatedTests.ExampleTestProject\Selenium.AutomatedTests.Samples.csproj", "{0004DC41-CE33-48D9-9AA2-A0EBD06E8D62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

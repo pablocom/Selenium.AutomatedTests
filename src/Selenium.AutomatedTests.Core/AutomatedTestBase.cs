@@ -1,25 +1,18 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using System;
-
 
 namespace Selenium.AutomatedTests.Core
 {
     public abstract class AutomatedTestBase
     {
+        protected abstract IWebDriver ProvideWebDriver();
+
         protected void RunAutomatedTest(Action<AutomationScenarioBuilder> testAction)
         {
-            var options = new ChromeOptions();
-            var driver = new ChromeDriver(options);
-            driver.LaunchApp(Guid.NewGuid().ToString());
-
-            AutomationScenarioTestReport scenarioReport;
-            using (var scenarioBuilder = new AutomationScenarioBuilder(driver))
-            {
-                testAction(scenarioBuilder);
-
-                scenarioReport = scenarioBuilder.BuildAndRun();
-            }
+            using var scenarioBuilder = new AutomationScenarioBuilder(ProvideWebDriver());
+            testAction(scenarioBuilder);
+            var scenarioReport = scenarioBuilder.BuildAndRun();
+            
 
             if (scenarioReport.HasFailure)
             {
