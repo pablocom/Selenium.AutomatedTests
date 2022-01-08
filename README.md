@@ -7,7 +7,7 @@ The aim of this package is to provide a easy way to write clear and explicit int
 
 Here is an example of what can be done with it:
 
-```
+```csharp
 [Fact]
 public void SuccessfulTest()
 {
