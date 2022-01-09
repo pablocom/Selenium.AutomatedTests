@@ -9,19 +9,13 @@ namespace Selenium.AutomatedTests.Core
         private int _stepIndex = 1;
 
         public bool HasFailure { get; private set; }
-        public bool IsComplete { get; private set; }
 
-        public AutomationScenarioTestReport()
+        internal AutomationScenarioTestReport()
         {
             results = new List<string>();
         }
 
-        public void SetComplete()
-        {
-            IsComplete = true;
-        }
-
-        public void AddResultFrom(IStep step)
+        internal void AddResultFrom(IStep step)
         {
             if (step.HasFailed)
             {
