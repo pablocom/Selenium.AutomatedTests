@@ -57,16 +57,15 @@ namespace Selenium.AutomatedTests.Core
                     var wait = new WebDriverWait(_webDriver, DefaultVisibilityTimeout);
                     return wait.Until(ExpectedConditions.ElementIsVisible(elementSelector));
                 },
-                action: action,
+                action,
                 description: $"Waiting until element with {elementSelector.Criteria} is visible..."
             );
-
             _steps.Enqueue(item);
 
             return this;
         }
 
-        public AutomationScenarioBuilder NavigateToUrl(string url)
+        public AutomationScenarioBuilder NavigateTo(string url)
         {
             var step = new NavigationStep(url);
             _steps.Enqueue(step);

@@ -1,3 +1,4 @@
+using System;
 using Xunit;
 using OpenQA.Selenium;
 using Selenium.AutomatedTests.Core.Steps;
@@ -69,5 +70,26 @@ public class AutomationScenarioBuilderTests
             firstStep.Execute(_webDriver);
             secondStep.Execute(_webDriver);
         });
+    }
+
+    [Fact]
+    public void Stops_scenario_execution_if_exception_is_thrown_in_step()
+    {
+        var firstStep = Substitute.For<IStep>();
+        var secondStep = Substitute.For<IStep>();
+        var thirdStep = Substitute.For<IStep>();
+        
+        secondStep.When(x => x.Execute(_webDriver)).Throw<Exception>();
+        
+        _automationScenarioBuilder.WithStep(firstStep);
+        _automationScenarioBuilder.WithStep(secondStep);
+        _automationScenarioBuilder.WithStep(thirdStep);
+
+        var testReport = _automationScenarioBuilder.BuildAndRun();
+        
+        Assert.True(testReport.HasFailure);
+        firstStep.Received(1).Execute(_webDriver);
+        secondStep.Received(1).Execute(_webDriver);
+        thirdStep.DidNotReceive().Execute(_webDriver);
     }
 }

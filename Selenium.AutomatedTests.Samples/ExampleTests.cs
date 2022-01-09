@@ -14,7 +14,7 @@ namespace Selenium.AutomatedTests.Samples
             RunAutomatedTest(builder =>
             {
                 builder
-                    .NavigateToUrl("https://google.com")
+                    .NavigateTo("https://google.com")
                     .WithSteps<GoogleSearchSteps>(step =>
                     {
                         step.WaitUntilSearchBarIsLoaded();
