@@ -2,10 +2,13 @@
 
 namespace Selenium.AutomatedTests.Core
 {
+    /// <summary>
+    /// Represents failure in the execution of an automation scenario
+    /// </summary>
     [Serializable]
     public class AutomationScenarioRunFailedException : Exception
     {
-        public AutomationScenarioRunFailedException(string message) : base(message)
+        internal AutomationScenarioRunFailedException(string message) : base(message)
         { }
     }
 }

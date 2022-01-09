@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Selenium.AutomatedTests.Core
 {
+    /// <summary>
+    /// Contains information about scenario execution
+    /// </summary>
     public class AutomationScenarioTestReport
     {
         private readonly ICollection<string> results;
