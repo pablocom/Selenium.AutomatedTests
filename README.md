@@ -1,10 +1,13 @@
 # Selenium.AutomatedTests.Core
 
-This project brings together a collection of tools to enhance the Selenium automation test development experience. It consists of an AutomationScenarioTestBuilder that configures a queue of steps the test has to run to consider the test result as successful.
+Easily write maintainable end-to-end tests using Selenium by writing automation scenarios in a fluent fashion.
 
-The aim of this package is to provide an easy way to write clear and explicit intention-revealing end-to-end tests by allowing users to write scenarios in a fluent fashion.
+It consist on a set of tool built atop existing features in Selenium.
 
-Here is an example of what can be done with it:
+The aim of this package is to provide an easy way to write clear and explicit intention-revealing end-to-end tests, providing a builder to setup an automation scenario defined by steps.
+It is agnostic from the testing framework, so it can be used indifferently with xUnit, NUnit, etc
+
+## Example usage
 
 ```csharp
 [Fact]
@@ -27,5 +30,4 @@ public void SuccessfulTest()
             );
     });
 }
-
 ```

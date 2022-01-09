@@ -10,15 +10,14 @@ namespace Selenium.AutomatedTests.Core
 {
     public class AutomationScenarioBuilder : IDisposable
     {
-        private static readonly TimeSpan DefaultVisibilityTimeout = TimeSpan.FromSeconds(30);
+        private static readonly TimeSpan DefaultVisibilityTimeout = TimeSpan.FromSeconds(15);
 
         private readonly IWebDriver _webDriver;
-        private readonly Queue<IStep> _steps;
+        private readonly Queue<IStep> _steps = new Queue<IStep>();
 
         public AutomationScenarioBuilder(IWebDriver webDriver)
         {
             _webDriver = webDriver;
-            _steps = new Queue<IStep>();
         }
 
         public AutomationScenarioTestReport BuildAndRun()
