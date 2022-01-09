@@ -1,4 +1,3 @@
-using System;
 using Xunit;
 using OpenQA.Selenium;
 using Selenium.AutomatedTests.Core.Steps;
@@ -28,7 +27,7 @@ public class AutomationScenarioBuilderTests
     [Fact]
     public void Runs_with_single_step_ok()
     {
-        _automationScenarioBuilder.WithStep(Substitute.For<IStep>());
+        AssumeStepsInScenario(Substitute.For<IStep>());
 
         var testReport = _automationScenarioBuilder.BuildAndRun();
 
@@ -41,10 +40,9 @@ public class AutomationScenarioBuilderTests
         var firstStep = Substitute.For<IStep>();
         var secondStep = Substitute.For<IStep>();
         firstStep.Description.Returns("First step description");
-        secondStep.Description.Returns("Second step description");
-        _automationScenarioBuilder.WithStep(firstStep);
-        _automationScenarioBuilder.WithStep(secondStep);
-
+        secondStep.Description.Returns("Second step description");        
+        AssumeStepsInScenario(firstStep, secondStep);
+        
         var testReport = _automationScenarioBuilder.BuildAndRun();
 
         var expectedSummary = $"\n\nStep 1: First step description : \n\n" +
@@ -58,9 +56,7 @@ public class AutomationScenarioBuilderTests
     {
         var firstStep = Substitute.For<IStep>();
         var secondStep = Substitute.For<IStep>();
-
-        _automationScenarioBuilder.WithStep(firstStep);
-        _automationScenarioBuilder.WithStep(secondStep);
+        AssumeStepsInScenario(firstStep, secondStep);
 
         var testReport = _automationScenarioBuilder.BuildAndRun();
 
@@ -73,23 +69,26 @@ public class AutomationScenarioBuilderTests
     }
 
     [Fact]
-    public void Stops_scenario_execution_if_exception_is_thrown_in_step()
+    public void Stops_scenario_execution_if_exception_is_thrown()
     {
         var firstStep = Substitute.For<IStep>();
-        var secondStep = Substitute.For<IStep>();
+        firstStep.Description.Returns("First step description");
+        var secondStep = new FakeFailureStep("Failure step");
         var thirdStep = Substitute.For<IStep>();
-        
-        secondStep.When(x => x.Execute(_webDriver)).Throw<Exception>();
-        
-        _automationScenarioBuilder.WithStep(firstStep);
-        _automationScenarioBuilder.WithStep(secondStep);
-        _automationScenarioBuilder.WithStep(thirdStep);
+        AssumeStepsInScenario(firstStep, secondStep, thirdStep);
 
         var testReport = _automationScenarioBuilder.BuildAndRun();
         
+        var expectedSummaryStart = $"\n\nStep 1: First step description : \n\n" +
+                                       $"Step 2: Failure step";
         Assert.True(testReport.HasFailure);
-        firstStep.Received(1).Execute(_webDriver);
-        secondStep.Received(1).Execute(_webDriver);
+        Assert.Contains(expectedSummaryStart, testReport.GetSummary());
         thirdStep.DidNotReceive().Execute(_webDriver);
+    }
+
+    private void AssumeStepsInScenario(params IStep[] steps)
+    {
+        foreach (var step in steps) 
+            _automationScenarioBuilder.WithStep(step);
     }
 }
