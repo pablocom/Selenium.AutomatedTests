@@ -8,17 +8,19 @@ using System.Linq;
 
 namespace Selenium.AutomatedTests.Core
 {
+    /// <summary>
+    /// Represents automation scenario setup.
+    /// </summary>
     public class AutomationScenarioBuilder : IDisposable
     {
-        private static readonly TimeSpan DefaultVisibilityTimeout = TimeSpan.FromSeconds(30);
+        private static readonly TimeSpan DefaultVisibilityTimeout = TimeSpan.FromSeconds(15);
 
         private readonly IWebDriver _webDriver;
-        private readonly Queue<IStep> _steps;
+        private readonly Queue<IStep> _steps = new Queue<IStep>();
 
         public AutomationScenarioBuilder(IWebDriver webDriver)
         {
             _webDriver = webDriver;
-            _steps = new Queue<IStep>();
         }
 
         public AutomationScenarioTestReport BuildAndRun()
@@ -44,11 +46,22 @@ namespace Selenium.AutomatedTests.Core
             return testReport;
         }
 
+        /// <summary>
+        /// Enqueues step to wait until web element with <paramref name="elementSelector"/> is visible.
+        /// </summary>
+        /// <param name="elementSelector">Web element selector</param>
+        /// <returns>The same <see cref="AutomationScenarioBuilder"/> instance</returns>
         public AutomationScenarioBuilder WaitUntilVisible(By elementSelector)
         {
             return WaitUntilVisible(elementSelector, _ => { });
         }
 
+        /// <summary>
+        /// Enqueues step to wait until web element with <paramref name="elementSelector"/> is visible and 
+        ///     executes <paramref name="action"/> if the element is located.
+        /// </summary>
+        /// <param name="elementSelector">Web element selector</param>
+        /// <returns>The same <see cref="AutomationScenarioBuilder"/> instance</returns>
         public AutomationScenarioBuilder WaitUntilVisible(By elementSelector, Action<IWebElement> action)
         {
             var item = new SingleWebElementStep(
@@ -65,6 +78,10 @@ namespace Selenium.AutomatedTests.Core
             return this;
         }
 
+        /// <summary>
+        /// Enqueues step that navigates to <paramref name="url"/>
+        /// </summary>
+        /// <returns>The same <see cref="AutomationScenarioBuilder"/> instance</returns>
         public AutomationScenarioBuilder NavigateTo(string url)
         {
             var step = new NavigationStep(url);
@@ -72,6 +89,13 @@ namespace Selenium.AutomatedTests.Core
             return this;
         }
 
+        /// <summary>
+        /// Enqueues step to find web element and invokes <paramref name="action"/> with located web element
+        /// </summary>
+        /// <param name="selectionPredicate">Function to locate single web element in <see cref="IWebDriver"/></param>
+        /// <param name="action">Action invoked with the located web element. It can be used for assertions and interactions.</param>
+        /// <param name="description">Step description for execution summary reporting.</param>
+        /// <returns>The same <see cref="AutomationScenarioBuilder"/> instance</returns>
         public AutomationScenarioBuilder WithStep(Func<IWebDriver, IWebElement> selectionPredicate,
             Action<IWebElement> action, string description)
         {
@@ -80,6 +104,13 @@ namespace Selenium.AutomatedTests.Core
             return this;
         }
 
+        /// <summary>
+        /// Enqueues step to find web element and invokes <paramref name="action"/> with located web element
+        /// </summary>
+        /// <param name="selectionPredicate">Function to locate multiple web elements in <see cref="IWebDriver"/></param>
+        /// <param name="action">Action invoked with located web elements. It can be used for assertions and interactions.</param>
+        /// <param name="description">Step description for execution summary reporting.</param>
+        /// <returns>The same <see cref="AutomationScenarioBuilder"/> instance</returns>
         public AutomationScenarioBuilder WithStep(Func<IWebDriver, IEnumerable<IWebElement>> selectionPredicate,
            Action<IEnumerable<IWebElement>> action, string description)
         {
@@ -99,6 +130,10 @@ namespace Selenium.AutomatedTests.Core
             return this;
         }
 
+        /// <summary>
+        /// Enqueues custom <see cref="IStep"/>
+        /// </summary>
+        /// <returns>The same <see cref="AutomationScenarioBuilder"/> instance</returns>
         public AutomationScenarioBuilder WithStep(IStep step)
         {
             _steps.Enqueue(step);
