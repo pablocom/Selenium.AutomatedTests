@@ -4,7 +4,6 @@ Easily write maintainable end-to-end tests using Selenium by writing automation 
 
 It consist on a set of tools built atop existing features in Selenium.
 
-The aim of this package is to provide an easy way to write clear and explicit intention-revealing end-to-end tests, providing a builder to setup an automation scenario defined by steps.
 It is agnostic from any testing framework, so it can be used indifferently with xUnit, NUnit, etc
 
 ## Installation
