@@ -2,7 +2,7 @@
 
 Easily write maintainable end-to-end tests using Selenium by writing automation scenarios in a fluent fashion.
 
-It consist on a set of tools built atop existing features in Selenium.
+It consist of a set of tools built atop existing features in Selenium.
 
 It is agnostic from any testing framework, so it can be used indifferently with xUnit, NUnit, etc
 
