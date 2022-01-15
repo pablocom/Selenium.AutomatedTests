@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Selenium.AutomatedTests.Core
+namespace Selenium.AutomatedTests
 {
     /// <summary>
     /// Represents failure in the execution of an automation scenario
@@ -8,7 +8,8 @@ namespace Selenium.AutomatedTests.Core
     [Serializable]
     public class AutomationScenarioRunFailedException : Exception
     {
-        internal AutomationScenarioRunFailedException(string message) : base(message)
+        internal AutomationScenarioRunFailedException(string automationTestReportSummary)
+            : base(automationTestReportSummary)
         { }
     }
 }

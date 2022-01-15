@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace Selenium.AutomatedTests.Core.Steps
+namespace Selenium.AutomatedTests.Steps
 {
     public interface IStep
     {

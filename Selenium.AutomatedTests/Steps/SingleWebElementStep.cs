@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium;
 
-namespace Selenium.AutomatedTests.Core.Steps
+namespace Selenium.AutomatedTests.Steps
 {
     internal class SingleWebElementStep : IStep
     {

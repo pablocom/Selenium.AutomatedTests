@@ -1,7 +1,7 @@
-﻿using Selenium.AutomatedTests.Core.Steps;
+﻿using Selenium.AutomatedTests.Steps;
 using System.Collections.Generic;
 
-namespace Selenium.AutomatedTests.Core
+namespace Selenium.AutomatedTests
 {
     /// <summary>
     /// Contains information about scenario execution
