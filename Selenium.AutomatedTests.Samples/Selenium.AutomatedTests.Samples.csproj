@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Selenium.AutomatedTests.Core\Selenium.AutomatedTests.csproj" />
+    <ProjectReference Include="..\Selenium.AutomatedTests\Selenium.AutomatedTests.csproj" />
   </ItemGroup>
 
 </Project>
