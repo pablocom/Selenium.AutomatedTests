@@ -16,24 +16,20 @@ dotnet add package Selenium.AutomatedTests --prerelease
 
 ```csharp
 [Fact]
-public void SuccessfulTest()
+public void SearchForATextInGoogle()
 {
-    RunAutomatedTest(builder =>
-    {
-        builder
-            .NavigateToUrl("https://google.com")
-            .WithSteps<GoogleSearchSteps>(step =>
-            {
-                step.WaitUntilSearchBarIsLoaded();
-                step.ClickOnAcceptTermsAndConditions();
-                step.Search("This is fine gif");
-            })
-            .WithStep(
-                description: $"Some step description",
-                selectionPredicate: webDriver => webDriver.FindElement(By.Id("elementId")),
-                action: webElement => { webElement.SendKeys("Some input"); }
-            );
-    });
+    var builder = new AutomationScenarioBuilder(ProvideWebDriver());
+
+    builder
+        .NavigateTo("https://google.com")
+        .WithSteps<GoogleSearchSteps>(step =>
+        {
+            step.WaitUntilSearchBarIsLoaded();
+            step.ClickOnAcceptTermsAndConditions();
+            step.Search("This is fine gif");
+        });
+
+    AutomationScenarioRunner.Run(builder);
 }
 ```
 
