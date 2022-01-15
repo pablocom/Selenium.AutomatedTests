@@ -1,9 +1,9 @@
 using Xunit;
 using OpenQA.Selenium;
-using Selenium.AutomatedTests.Core.Steps;
 using NSubstitute;
+using Selenium.AutomatedTests.Steps;
 
-namespace Selenium.AutomatedTests.Core.UnitTests;
+namespace Selenium.AutomatedTests.UnitTests;
 
 public class AutomationScenarioBuilderTests
 {
@@ -40,9 +40,9 @@ public class AutomationScenarioBuilderTests
         var firstStep = Substitute.For<IStep>();
         var secondStep = Substitute.For<IStep>();
         firstStep.Description.Returns("First step description");
-        secondStep.Description.Returns("Second step description");        
+        secondStep.Description.Returns("Second step description");
         AssumeStepsInScenario(firstStep, secondStep);
-        
+
         var testReport = _automationScenarioBuilder.BuildAndRun();
 
         var expectedSummary = $"\n\nStep 1: First step description : \n\n" +
@@ -78,7 +78,7 @@ public class AutomationScenarioBuilderTests
         AssumeStepsInScenario(firstStep, secondStep, thirdStep);
 
         var testReport = _automationScenarioBuilder.BuildAndRun();
-        
+
         var expectedSummaryStart = $"\n\nStep 1: First step description : \n\n" +
                                        $"Step 2: Failure step";
         Assert.True(testReport.HasFailure);
@@ -88,7 +88,7 @@ public class AutomationScenarioBuilderTests
 
     private void AssumeStepsInScenario(params IStep[] steps)
     {
-        foreach (var step in steps) 
+        foreach (var step in steps)
             _automationScenarioBuilder.WithStep(step);
     }
 }

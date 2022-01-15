@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using OpenQA.Selenium;
 
-namespace Selenium.AutomatedTests.Core.Steps
+namespace Selenium.AutomatedTests.Steps
 {
     internal class MultipleWebElementsStep : IStep
     {

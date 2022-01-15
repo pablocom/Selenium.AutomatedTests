@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System;
 
-namespace Selenium.AutomatedTests.Core.Steps
+namespace Selenium.AutomatedTests.Steps
 {
     internal class NavigationStep : IStep
     {

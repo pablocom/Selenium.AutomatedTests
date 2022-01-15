@@ -1,12 +1,12 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using Selenium.AutomatedTests.Core.Steps;
+using Selenium.AutomatedTests.Steps;
 using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Selenium.AutomatedTests.Core
+namespace Selenium.AutomatedTests
 {
     /// <summary>
     /// Represents automation scenario setup.
@@ -119,14 +119,11 @@ namespace Selenium.AutomatedTests.Core
             return this;
         }
 
-        public AutomationScenarioBuilder WithSteps<TSetupSteps>(params Action<TSetupSteps>[] steps)
+        public AutomationScenarioBuilder WithSteps<TSetupSteps>(Action<TSetupSteps> steps)
             where TSetupSteps : SetupSteps
         {
             var setupSteps = (TSetupSteps)Activator.CreateInstance(typeof(TSetupSteps), this);
-            foreach (var step in steps)
-            {
-                step(setupSteps);
-            }
+            steps(setupSteps);
             return this;
         }
 

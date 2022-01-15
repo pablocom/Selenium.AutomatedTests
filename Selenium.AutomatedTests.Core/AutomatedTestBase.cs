@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System;
 
-namespace Selenium.AutomatedTests.Core
+namespace Selenium.AutomatedTests
 {
     /// <summary>
     /// Defines an automation test base class to encapsulate automation scenario setup and execution

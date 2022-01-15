@@ -1,6 +1,4 @@
-﻿
-
-namespace Selenium.AutomatedTests.Core.Steps
+﻿namespace Selenium.AutomatedTests.Steps
 {
     public abstract class SetupSteps
     {
