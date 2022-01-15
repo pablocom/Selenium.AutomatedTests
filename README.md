@@ -36,3 +36,5 @@ public void SuccessfulTest()
     });
 }
 ```
+
+Documentation: https://github.com/pablocom/Selenium.AutomatedTests.Core/wiki
