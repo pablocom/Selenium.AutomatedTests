@@ -4,24 +4,24 @@ using Xunit;
 
 namespace Selenium.AutomatedTests.Samples;
 
-public class ExampleScenarios : AutomatedTestBase
+public class ExampleScenarios
 {
+    protected IWebDriver ProvideWebDriver() => new ChromeDriver();
+
     [Fact]
     public void SearchForATextInGoogle()
     {
-        RunAutomatedTest(builder =>
-        {
-            builder
-                .NavigateTo("https://google.com")
-                .WithSteps<GoogleSearchSteps>(step =>
-                {
-                    step.WaitUntilSearchBarIsLoaded();
-                    step.ClickOnAcceptTermsAndConditions();
-                    step.Search("This is fine gif");
-                });
-        });
-    }
+        var builder = new AutomationScenarioBuilder(ProvideWebDriver());
 
-    protected override IWebDriver ProvideWebDriver() => new ChromeDriver();
+        builder.NavigateTo("https://google.com")
+            .WithSteps<GoogleSearchSteps>(step =>
+            {
+                step.WaitUntilSearchBarIsLoaded();
+                step.ClickOnAcceptTermsAndConditions();
+                step.Search("This is fine gif");
+            });
+
+        AutomationScenarioRunner.Run(builder);
+    }
 }
 
