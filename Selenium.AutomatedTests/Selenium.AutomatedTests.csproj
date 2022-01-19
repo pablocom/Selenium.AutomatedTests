@@ -4,7 +4,7 @@
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
 		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
-		<Version>0.1.4-alpha</Version>
+		<Version>0.1.4</Version>
 		<PackageId>Selenium.AutomatedTests</PackageId>
 		<Title>Selenium.AutomatedTests</Title>
 		<PackageDescription>Easily write maintainable end-to-end tests by writing scenarios in a fluent fashion</PackageDescription>
