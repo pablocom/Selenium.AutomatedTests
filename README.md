@@ -9,7 +9,7 @@ It is agnostic from any testing framework, so it can be used indifferently with 
 ## Installation
 Install the library from [NuGet](https://www.nuget.org/packages/Selenium.AutomatedTests):
 ``` console
-dotnet add package Selenium.AutomatedTests --prerelease
+dotnet add package Selenium.AutomatedTests
 ```
 
 ## Example usage
