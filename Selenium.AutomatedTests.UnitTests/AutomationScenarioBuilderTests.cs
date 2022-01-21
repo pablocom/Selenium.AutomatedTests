@@ -8,20 +8,22 @@ namespace Selenium.AutomatedTests.UnitTests;
 public class AutomationScenarioBuilderTests
 {
     private IWebDriver _webDriver;
+    private IAutomationScenarioTestReportLogger _logger;
     private AutomationScenarioBuilder _automationScenarioBuilder;
 
     public AutomationScenarioBuilderTests()
     {
         _webDriver = Substitute.For<IWebDriver>();
-        _automationScenarioBuilder = new AutomationScenarioBuilder(_webDriver);
+        _logger = Substitute.For<IAutomationScenarioTestReportLogger>();
+        _automationScenarioBuilder = new AutomationScenarioBuilder(_webDriver, _logger);
     }
 
     [Fact]
     public void Runs_with_no_steps_just_ok()
     {
-        var testReport = _automationScenarioBuilder.BuildAndRun();
+        _automationScenarioBuilder.Run();
 
-        Assert.False(testReport.HasFailure);
+        _logger.Received().Log(Arg.Is<AutomationScenarioTestReport>(x => x.HasFailure == false));
     }
 
     [Fact]
@@ -29,9 +31,9 @@ public class AutomationScenarioBuilderTests
     {
         AssumeStepsInScenario(Substitute.For<IStep>());
 
-        var testReport = _automationScenarioBuilder.BuildAndRun();
+        _automationScenarioBuilder.Run();
 
-        Assert.False(testReport.HasFailure);
+        _logger.Received().Log(Arg.Is<AutomationScenarioTestReport>(x => x.HasFailure == false));
     }
 
     [Fact]
@@ -43,24 +45,27 @@ public class AutomationScenarioBuilderTests
         secondStep.Description.Returns("Second step description");
         AssumeStepsInScenario(firstStep, secondStep);
 
-        var testReport = _automationScenarioBuilder.BuildAndRun();
+        _automationScenarioBuilder.Run();
 
+        
+        _logger.Received().Log(Arg.Is<AutomationScenarioTestReport>(x => x.HasFailure == false));
         var expectedSummary = $"\n\nStep 1: First step description : \n\n" +
-                                  $"Step 2: Second step description : ";
-        Assert.False(testReport.HasFailure);
-        Assert.Equal(expectedSummary, testReport.GetSummary());
+                              $"Step 2: Second step description : ";
+        _logger.Received().Log(Arg.Is<AutomationScenarioTestReport>(x => x.GetSummary() == expectedSummary));
+
     }
 
     [Fact]
-    public void Executes_steps_in_order()
+    public void Runs_steps_in_order()
     {
         var firstStep = Substitute.For<IStep>();
         var secondStep = Substitute.For<IStep>();
         AssumeStepsInScenario(firstStep, secondStep);
 
-        var testReport = _automationScenarioBuilder.BuildAndRun();
+        _automationScenarioBuilder.Run();
 
-        Assert.False(testReport.HasFailure);
+        _logger.Received().Log(Arg.Is<AutomationScenarioTestReport>(x => x.HasFailure == false));
+
         Received.InOrder(() =>
         {
             firstStep.Execute(_webDriver);
@@ -77,12 +82,12 @@ public class AutomationScenarioBuilderTests
         var thirdStep = Substitute.For<IStep>();
         AssumeStepsInScenario(firstStep, secondStep, thirdStep);
 
-        var testReport = _automationScenarioBuilder.BuildAndRun();
-
+        _automationScenarioBuilder.Run();
+        
+        _logger.Received().Log(Arg.Is<AutomationScenarioTestReport>(x => x.HasFailure == true));
         var expectedSummaryStart = $"\n\nStep 1: First step description : \n\n" +
-                                       $"Step 2: Failure step";
-        Assert.True(testReport.HasFailure);
-        Assert.Contains(expectedSummaryStart, testReport.GetSummary());
+                                   $"Step 2: Failure step";
+        _logger.Received().Log(Arg.Is<AutomationScenarioTestReport>(x => x.GetSummary().Contains(expectedSummaryStart)));
         thirdStep.DidNotReceive().Execute(_webDriver);
     }
 

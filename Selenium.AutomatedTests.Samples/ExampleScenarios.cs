@@ -8,10 +8,12 @@ public class ExampleScenarios
 {
     protected IWebDriver ProvideWebDriver() => new ChromeDriver();
 
-    [Fact]
+    protected IAutomationScenarioTestReportLogger ProvideAutomationScenarioTestReportLogger() => new ConsoleAutomationScenarioTestReportLogger();
+
+        [Fact]
     public void SearchForATextInGoogle()
     {
-        var builder = new AutomationScenarioBuilder(ProvideWebDriver());
+        var builder = new AutomationScenarioBuilder(ProvideWebDriver(), ProvideAutomationScenarioTestReportLogger());
 
         builder.NavigateTo("https://google.com")
             .WithSteps<GoogleSearchSteps>(step =>
@@ -19,9 +21,8 @@ public class ExampleScenarios
                 step.WaitUntilSearchBarIsLoaded();
                 step.ClickOnAcceptTermsAndConditions();
                 step.Search("This is fine gif");
-            });
-
-        AutomationScenarioRunner.Run(builder);
+            })
+            .Run();
     }
 }
 
