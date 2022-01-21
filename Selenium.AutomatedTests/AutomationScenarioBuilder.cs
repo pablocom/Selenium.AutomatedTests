@@ -16,34 +16,19 @@ namespace Selenium.AutomatedTests
         private static readonly TimeSpan DefaultVisibilityTimeout = TimeSpan.FromSeconds(15);
 
         private readonly IWebDriver _webDriver;
+        private readonly IAutomationScenarioTestReportLogger _logger;
         private readonly Queue<IStep> _steps = new Queue<IStep>();
 
-        public AutomationScenarioBuilder(IWebDriver webDriver)
+        public AutomationScenarioBuilder(IWebDriver webDriver, IAutomationScenarioTestReportLogger logger)
         {
             _webDriver = webDriver;
+            _logger = logger;
         }
 
-        public AutomationScenarioTestReport BuildAndRun()
+        public void Run()
         {
-            var testReport = new AutomationScenarioTestReport();
-            while (_steps.Any() && !testReport.HasFailure)
-            {
-                var currentStep = _steps.Dequeue();
-                try
-                {
-                    currentStep.Execute(_webDriver);
-                }
-                catch (Exception ex)
-                {
-                    currentStep.Fail($"\n\t Exception on step : {currentStep.Description} \n\n {ex}");
-                }
-                finally
-                {
-                    testReport.AddResultFrom(currentStep);
-                }
-            }
-
-            return testReport;
+            var scenarioReport = Build();
+            _logger.Log(scenarioReport);
         }
 
         /// <summary>
@@ -140,6 +125,29 @@ namespace Selenium.AutomatedTests
         public void Dispose()
         {
             _webDriver.Dispose();
+        }
+
+        private AutomationScenarioTestReport Build()
+        {
+            var testReport = new AutomationScenarioTestReport();
+            while (_steps.Any() && !testReport.HasFailure)
+            {
+                var currentStep = _steps.Dequeue();
+                try
+                {
+                    currentStep.Execute(_webDriver);
+                }
+                catch (Exception ex)
+                {
+                    currentStep.Fail($"\n\t Exception on step : {currentStep.Description} \n\n {ex}");
+                }
+                finally
+                {
+                    testReport.AddResultFrom(currentStep);
+                }
+            }
+
+            return testReport;
         }
     }
 }
