@@ -1,6 +1,4 @@
-﻿using OpenQA.Selenium;
-
-namespace Selenium.AutomatedTests.Steps
+﻿namespace Selenium.AutomatedTests.Steps
 {
     public interface IStep
     {
@@ -8,7 +6,7 @@ namespace Selenium.AutomatedTests.Steps
         string Description { get; }
         string Result { get; }
 
-        void Execute(IWebDriver webDriver);
+        void Execute();
         void Fail(string message);
     }
 }

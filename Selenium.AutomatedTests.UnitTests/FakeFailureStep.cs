@@ -6,16 +6,18 @@ namespace Selenium.AutomatedTests.UnitTests;
 
 internal class FakeFailureStep : IStep
 {
+    private readonly IWebDriver _webDriver;
     public bool HasFailed { get; private set; }
     public string Description { get; set; }
     public string? Result { get; private set; }
 
-    internal FakeFailureStep(string description)
+    internal FakeFailureStep(IWebDriver webDriver, string description)
     {
+        _webDriver = webDriver;
         Description = description;
     }
 
-    public void Execute(IWebDriver webDriver) => throw new Exception("Step failed");
+    public void Execute() => throw new Exception("Step failed");
 
     public void Fail(string message)
     {
