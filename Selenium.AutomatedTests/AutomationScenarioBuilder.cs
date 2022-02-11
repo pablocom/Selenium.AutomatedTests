@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Selenium.AutomatedTests
-{
-    /// <summary>
+namespace Selenium.AutomatedTests;
+
+ /// <summary>
     /// Represents automation scenario setup.
     /// </summary>
     public class AutomationScenarioBuilder : IDisposable
@@ -142,4 +142,3 @@ namespace Selenium.AutomatedTests
             _webDriver.Dispose();
         }
     }
-}

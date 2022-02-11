@@ -1,41 +1,40 @@
 ﻿using Selenium.AutomatedTests.Steps;
 using System.Collections.Generic;
 
-namespace Selenium.AutomatedTests
+namespace Selenium.AutomatedTests;
+
+/// <summary>
+/// Contains information about scenario execution
+/// </summary>
+public class AutomationScenarioTestReport
 {
-    /// <summary>
-    /// Contains information about scenario execution
-    /// </summary>
-    public class AutomationScenarioTestReport
+    private readonly ICollection<string> results;
+    private int _stepIndex = 1;
+
+    public bool HasFailure { get; private set; }
+
+    internal AutomationScenarioTestReport()
     {
-        private readonly ICollection<string> results;
-        private int _stepIndex = 1;
+        results = new List<string>();
+    }
 
-        public bool HasFailure { get; private set; }
-
-        internal AutomationScenarioTestReport()
+    internal void AddResultFrom(IStep step)
+    {
+        if (step.HasFailed)
         {
-            results = new List<string>();
+            HasFailure = true;
         }
+        results.Add(FormatResult(step));
+        _stepIndex++;
+    }
 
-        internal void AddResultFrom(IStep step)
-        {
-            if (step.HasFailed)
-            {
-                HasFailure = true;
-            }
-            results.Add(FormatResult(step));
-            _stepIndex++;
-        }
+    public string GetSummary()
+    {
+        return $"\n\n{string.Join("\n\n", results)}";
+    }
 
-        public string GetSummary()
-        {
-            return $"\n\n{string.Join("\n\n", results)}";
-        }
-
-        private string FormatResult(IStep step)
-        {
-            return $"Step {_stepIndex}: {step.Description} : {step.Result}";
-        }
+    private string FormatResult(IStep step)
+    {
+        return $"Step {_stepIndex}: {step.Description} : {step.Result}";
     }
 }
