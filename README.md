@@ -6,8 +6,6 @@ Easily write maintainable end-to-end tests using Selenium by writing automation 
 
 It consists of a set of tools built atop existing features in Selenium.
 
-It is agnostic from any testing framework, so it can be used indifferently with xUnit, NUnit, etc
-
 ## Installation
 Install the library from [NuGet](https://www.nuget.org/packages/Selenium.AutomatedTests):
 ``` console
