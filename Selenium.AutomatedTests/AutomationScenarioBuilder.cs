@@ -66,7 +66,7 @@ namespace Selenium.AutomatedTests
         ///     executes <paramref name="action"/> if the element is located.
         /// </summary>
         /// <param name="elementSelector">Web element selector</param>
-        /// <param name="action"></param>
+        /// <param name="action">Action invoked with the located web element. It can be used for assertions and interactions.</param>
         /// <returns>The same <see cref="AutomationScenarioBuilder"/> instance</returns>
         public AutomationScenarioBuilder WaitUntilVisible(By elementSelector, Action<IWebElement> action)
         {
@@ -159,9 +159,6 @@ namespace Selenium.AutomatedTests
             return this;
         }
 
-        /// <summary>
-        /// clean at the de-construction of the object 
-        /// </summary>
         public void Dispose()
         {
             _webDriver.Dispose();
