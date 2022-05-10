@@ -5,6 +5,7 @@ using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace Selenium.AutomatedTests
 {
@@ -18,6 +19,10 @@ namespace Selenium.AutomatedTests
         private readonly IWebDriver _webDriver;
         private readonly Queue<IStep> _steps = new Queue<IStep>();
 
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="webDriver"></param>
         public AutomationScenarioBuilder(IWebDriver webDriver)
         {
             _webDriver = webDriver;
@@ -61,6 +66,7 @@ namespace Selenium.AutomatedTests
         ///     executes <paramref name="action"/> if the element is located.
         /// </summary>
         /// <param name="elementSelector">Web element selector</param>
+        /// <param name="action">Action invoked with the located web element. It can be used for assertions and interactions.</param>
         /// <returns>The same <see cref="AutomationScenarioBuilder"/> instance</returns>
         public AutomationScenarioBuilder WaitUntilVisible(By elementSelector, Action<IWebElement> action)
         {
@@ -75,6 +81,16 @@ namespace Selenium.AutomatedTests
             );
             _steps.Enqueue(item);
 
+            return this;
+        }
+
+        /// <summary>
+        /// Enqueues step that sleeps number of <paramref name="milliseconds"/>
+        /// </summary>
+        /// <returns>The same <see cref="AutomationScenarioBuilder"/> instance</returns>
+        public AutomationScenarioBuilder Wait(int milliseconds)
+        {
+            _steps.Enqueue(new WaitStep(TimeSpan.FromMilliseconds(milliseconds)));
             return this;
         }
 
@@ -119,6 +135,12 @@ namespace Selenium.AutomatedTests
             return this;
         }
 
+        /// <summary>
+        /// Adding generic step
+        /// </summary>
+        /// <param name="steps"></param>
+        /// <typeparam name="TSetupSteps"></typeparam>
+        /// <returns></returns>
         public AutomationScenarioBuilder WithSteps<TSetupSteps>(Action<TSetupSteps> steps)
             where TSetupSteps : SetupSteps
         {

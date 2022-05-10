@@ -11,7 +11,7 @@ public class ExampleScenarios
     [Fact]
     public void SearchForATextInGoogle()
     {
-        var builder = new AutomationScenarioBuilder(ProvideWebDriver());
+        using var builder = new AutomationScenarioBuilder(ProvideWebDriver());
 
         builder.NavigateTo("https://google.com")
             .WithSteps<GoogleSearchSteps>(step =>
