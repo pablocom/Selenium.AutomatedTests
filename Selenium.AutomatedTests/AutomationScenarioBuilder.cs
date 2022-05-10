@@ -90,7 +90,7 @@ namespace Selenium.AutomatedTests
         /// <returns>The same <see cref="AutomationScenarioBuilder"/> instance</returns>
         public AutomationScenarioBuilder Wait(int milliseconds)
         {
-            Thread.Sleep(milliseconds);
+            _steps.Enqueue(new WaitStep(TimeSpan.FromMilliseconds(milliseconds)));
             return this;
         }
 
