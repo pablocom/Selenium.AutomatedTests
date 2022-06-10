@@ -18,9 +18,9 @@ dotnet add package Selenium.AutomatedTests
 [Fact]
 public void SearchForATextInGoogle()
 {
-    var builder = new AutomationScenarioBuilder(ProvideWebDriver());
+    var scenario = new AutomationScenarioBuilder(ProvideWebDriver());
 
-    builder
+    scenario
         .NavigateTo("https://google.com")
         .WithSteps<GoogleSearchSteps>(step =>
         {
@@ -29,7 +29,7 @@ public void SearchForATextInGoogle()
             step.Search("This is fine gif");
         });
 
-    AutomationScenarioRunner.Run(builder);
+    AutomationScenarioRunner.Run(scenario);
 }
 ```
 
