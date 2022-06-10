@@ -18,7 +18,7 @@ dotnet add package Selenium.AutomatedTests
 [Fact]
 public void SearchForATextInGoogle()
 {
-    var scenario = new AutomationScenarioBuilder(ProvideWebDriver());
+    using var scenario = new AutomationScenarioBuilder(ProvideWebDriver());
 
     scenario
         .NavigateTo("https://google.com")
