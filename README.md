@@ -29,7 +29,7 @@ public void SearchForATextInGoogle()
             step.Search("This is fine gif");
         });
 
-    AutomationScenarioRunner.Run(scenario);
+    scenario.BuildAndRun();
 }
 ```
 
