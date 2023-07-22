@@ -1,3 +1,5 @@
+> IMPORTANT: This package has been deprecated
+
 # Selenium.AutomatedTests
 
 [![CI](https://github.com/pablocom/Selenium.AutomatedTests/actions/workflows/buildAndRunUnitTests.yml/badge.svg)](https://github.com/pablocom/Selenium.AutomatedTests/actions/workflows/buildAndRunUnitTests.yml)
