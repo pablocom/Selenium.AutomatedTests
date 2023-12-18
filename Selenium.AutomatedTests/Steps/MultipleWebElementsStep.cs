@@ -6,11 +6,13 @@ namespace Selenium.AutomatedTests.Steps
 {
     internal class MultipleWebElementsStep : IStep
     {
+        private readonly IWebDriver _webDriver;
         private readonly Func<IWebDriver, IEnumerable<IWebElement>> _selectionPredicate;
         private readonly Action<IEnumerable<IWebElement>> _action;
 
-        public MultipleWebElementsStep(Func<IWebDriver, IEnumerable<IWebElement>> selectionPredicate, Action<IEnumerable<IWebElement>> action, string description)
+        public MultipleWebElementsStep(IWebDriver webDriver, Func<IWebDriver, IEnumerable<IWebElement>> selectionPredicate, Action<IEnumerable<IWebElement>> action, string description)
         {
+            _webDriver = webDriver;
             _selectionPredicate = selectionPredicate;
             _action = action;
             Description = description;
@@ -20,10 +22,10 @@ namespace Selenium.AutomatedTests.Steps
         public bool HasFailed { get; private set; }
         public string Result { get; private set; }
 
-        public void Execute(IWebDriver webDriver)
+        public void Execute()
         {
 
-            var webElements = _selectionPredicate(webDriver);
+            var webElements = _selectionPredicate(_webDriver);
             _action(webElements);
         }
 

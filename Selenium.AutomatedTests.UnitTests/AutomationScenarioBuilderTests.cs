@@ -63,8 +63,8 @@ public class AutomationScenarioBuilderTests
         Assert.False(testReport.HasFailure);
         Received.InOrder(() =>
         {
-            firstStep.Execute(_webDriver);
-            secondStep.Execute(_webDriver);
+            firstStep.Execute();
+            secondStep.Execute();
         });
     }
 
@@ -73,7 +73,7 @@ public class AutomationScenarioBuilderTests
     {
         var firstStep = Substitute.For<IStep>();
         firstStep.Description.Returns("First step description");
-        var secondStep = new FakeFailureStep("Failure step");
+        var secondStep = new FakeFailureStep(_webDriver, "Failure step");
         var thirdStep = Substitute.For<IStep>();
         AssumeStepsInScenario(firstStep, secondStep, thirdStep);
 
@@ -83,7 +83,7 @@ public class AutomationScenarioBuilderTests
                                        $"Step 2: Failure step";
         Assert.True(testReport.HasFailure);
         Assert.Contains(expectedSummaryStart, testReport.GetSummary());
-        thirdStep.DidNotReceive().Execute(_webDriver);
+        thirdStep.DidNotReceive().Execute();
     }
 
     private void AssumeStepsInScenario(params IStep[] steps)

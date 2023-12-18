@@ -36,7 +36,7 @@ namespace Selenium.AutomatedTests
                 var currentStep = _steps.Dequeue();
                 try
                 {
-                    currentStep.Execute(_webDriver);
+                    currentStep.Execute();
                 }
                 catch (Exception ex)
                 {
@@ -71,6 +71,7 @@ namespace Selenium.AutomatedTests
         public AutomationScenarioBuilder WaitUntilVisible(By elementSelector, Action<IWebElement> action)
         {
             var item = new SingleWebElementStep(
+                _webDriver,
                 webDriver =>
                 {
                     var wait = new WebDriverWait(_webDriver, DefaultVisibilityTimeout);
@@ -100,7 +101,7 @@ namespace Selenium.AutomatedTests
         /// <returns>The same <see cref="AutomationScenarioBuilder"/> instance</returns>
         public AutomationScenarioBuilder NavigateTo(string url)
         {
-            var step = new NavigationStep(url);
+            var step = new NavigationStep(_webDriver, url);
             _steps.Enqueue(step);
             return this;
         }
@@ -115,7 +116,7 @@ namespace Selenium.AutomatedTests
         public AutomationScenarioBuilder WithStep(Func<IWebDriver, IWebElement> selectionPredicate,
             Action<IWebElement> action, string description)
         {
-            var item = new SingleWebElementStep(selectionPredicate, action, description);
+            var item = new SingleWebElementStep(_webDriver, selectionPredicate, action, description);
             _steps.Enqueue(item);
             return this;
         }
@@ -130,7 +131,7 @@ namespace Selenium.AutomatedTests
         public AutomationScenarioBuilder WithStep(Func<IWebDriver, IEnumerable<IWebElement>> selectionPredicate,
            Action<IEnumerable<IWebElement>> action, string description)
         {
-            var item = new MultipleWebElementsStep(selectionPredicate, action, description);
+            var item = new MultipleWebElementsStep(_webDriver, selectionPredicate, action, description);
             _steps.Enqueue(item);
             return this;
         }
